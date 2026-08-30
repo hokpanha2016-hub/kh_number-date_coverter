@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="km">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Web — Khmer Number & Date Converter</title>
+
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/4.0.0/uicons-duotone-rounded/css/uicons-duotone-rounded.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/4.0.0/uicons-bold-rounded/css/uicons-bold-rounded.css"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1>កម្មវិធីបម្លែងលេខ និងកាលបរិច្ឆេទខ្មែរ</h1>
+        <div class="badge">KHMER NUMBER & DATE TOOL</div>
+      </header>
+
+      <div class="tools-grid">
+        <!-- NUMBER TOOL -->
+        <section class="card">
+          <h2>
+            🔢
+            <span>បម្លែងចំនួន → ពាក្យអានចំនួន</span>
+          </h2>
+
+          <label for="numberInput">បញ្ចូលលេខ</label>
+
+          <input
+            id="numberInput"
+            type="text"
+            inputmode="numeric"
+            autocomplete="off"
+            placeholder="ឧ. ១២៣ ឬ 123"
+          />
+
+          <div class="output-row">
+            <div class="output" id="numberOutput">លទ្ធផលនឹងបង្ហាញនៅទីនេះ</div>
+
+            <button
+              class="copy-icon"
+              type="button"
+              title="Copy ពាក្យ"
+              aria-label="Copy អក្សរលេខ"
+              onclick="copyText('numberOutput', 'copyNumberStatus', this)"
+            >
+              <i class="fi fi-dr-copy"></i>
+            </button>
+          </div>
+
+          <span class="status" id="copyNumberStatus"></span>
+
+          <div class="output-row riel-output-row">
+            <div class="output riel-output" id="rielOutput">
+              លទ្ធផលជារៀលគត់នឹងបង្ហាញនៅទីនេះ
+            </div>
+
+            <button
+              class="copy-icon"
+              type="button"
+              title="Copy រៀលគត់"
+              aria-label="Copy រៀលគត់"
+              onclick="copyText('rielOutput', 'copyRielStatus', this)"
+            >
+              <i class="fi fi-dr-copy"></i>
+            </button>
+          </div>
+
+          <span class="status" id="copyRielStatus"></span>
+        </section>
+
+        <!-- DATE TOOL -->
+        <section class="card">
+          <h2>
+            📅
+            <span>បម្លែងកាលបរិច្ឆេទ → ល្បះ</span>
+          </h2>
+
+          <label for="dateDisplay">ជ្រើសរើសកាលបរិច្ឆេទ</label>
+
+          <div class="date-picker" id="datePicker">
+            <div
+              class="date-display"
+              id="dateDisplay"
+              tabindex="0"
+              role="button"
+              aria-haspopup="dialog"
+              aria-expanded="false"
+            >
+              <span class="date-value date-placeholder" id="dateValue">
+                ចុចទីនេះ ដើម្បីជ្រើសថ្ងៃ ខែ ឆ្នាំ
+              </span>
+
+              <span class="calendar-icon">
+                <i class="fi fi-br-dropdown-select"></i>
+              </span>
+            </div>
+
+            <!-- CALENDAR -->
+            <div
+              class="calendar-popup"
+              id="calendarPopup"
+              role="dialog"
+              aria-label="ជ្រើសរើសកាលបរិច្ឆេទ"
+            >
+              <div class="cal-head">
+                <button
+                  class="cal-nav"
+                  type="button"
+                  onclick="changeCalendarMonth(-1)"
+                  aria-label="ខែមុន"
+                >
+                  ‹
+                </button>
+
+                <div class="cal-title" id="calTitle"></div>
+
+                <button
+                  class="cal-nav"
+                  type="button"
+                  onclick="changeCalendarMonth(1)"
+                  aria-label="ខែបន្ទាប់"
+                >
+                  ›
+                </button>
+              </div>
+
+              <div class="cal-week">
+                <div>ច</div>
+                <div>អ</div>
+                <div>ព</div>
+                <div>ព្រ</div>
+                <div>សុ</div>
+                <div>ស</div>
+                <div>អា</div>
+              </div>
+
+              <div class="cal-grid" id="calGrid"></div>
+
+              <div class="cal-footer">
+                <button class="cal-today" type="button" onclick="selectToday()">
+                  ថ្ងៃនេះ
+                </button>
+
+                <span id="calHint"></span>
+              </div>
+            </div>
+
+            <input id="dateInput" type="hidden" />
+          </div>
+
+          <!-- SOLAR RESULT -->
+          <div class="date-result">
+            <div class="result-title">☀️ សូរិយគតិ</div>
+
+            <div class="output-row">
+              <div class="output" id="solarOutput">
+                លទ្ធផលសូរិយគតិនឹងបង្ហាញនៅទីនេះ
+              </div>
+
+              <button
+                class="copy-icon"
+                type="button"
+                title="Copy សូរិយគតិ"
+                aria-label="Copy សូរិយគតិ"
+                onclick="copyText('solarOutput', 'copySolarStatus', this)"
+              >
+                <i class="fi fi-dr-copy"></i>
+              </button>
+            </div>
+
+            <span class="status" id="copySolarStatus"></span>
+          </div>
+
+          <!-- LUNAR RESULT -->
+          <div class="date-result">
+            <div class="result-title">🌙 ចន្ទគតិ</div>
+
+            <div class="output-row">
+              <div class="output" id="lunarOutput">
+                លទ្ធផលចន្ទគតិនឹងបង្ហាញនៅទីនេះ
+              </div>
+
+              <button
+                class="copy-icon"
+                type="button"
+                title="Copy ចន្ទគតិ"
+                aria-label="Copy ចន្ទគតិ"
+                onclick="copyText('lunarOutput', 'copyLunarStatus', this)"
+              >
+                <i class="fi fi-dr-copy"></i>
+              </button>
+            </div>
+
+            <span class="status" id="copyLunarStatus"></span>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/ThyrithSor/momentkh@3.0.3/momentkh.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
