@@ -110,7 +110,6 @@ body::after {
     0 30px 80px rgba(31, 38, 135, 0.16),
     0 8px 25px rgba(31, 38, 135, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.9);
-}
 
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
@@ -174,7 +173,6 @@ body::after {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-
 }
 
 .sub {
@@ -739,9 +737,11 @@ input::placeholder {
   body {
     padding: 10px;
     align-items: flex-start;
+    overflow: scroll;
   }
 
   .container {
+    overflow: scroll;
     max-height: none;
     padding: 15px;
     border-radius: 23px;
@@ -757,9 +757,13 @@ input::placeholder {
 ========================================================= */
 
 @media (max-width: 480px) {
+  body {
+    overflow: scroll;
+  }
   .container {
     padding: 12px;
     border-radius: 19px;
+    overflow: scroll;
   }
 
   .card {
